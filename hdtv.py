@@ -16,6 +16,7 @@ name = "cctv5hd"
 url = "http://hdtv.neu6.edu.cn/time-select?p="+name
 a = Get(url)
 bt = BeautifulSoup(a,"lxml")
+print bt
 href = bt.find_all(attrs={'id' : "noon"})
 name = bt.find_all(attrs={'id' : "afternoon"})
 a = []
