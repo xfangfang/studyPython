@@ -1,17 +1,17 @@
 # encoding: utf-8
-def sendMail(contents="null",sendTo="2553041586@qq.com"):
+def sendMail(contents="null",sendTo="2553041586@qq.com",subjects="null"):
     import smtplib
     from email.mime.text import MIMEText
     sender = "20154409@stu.neu.edu.cn"
-    receivers = ["601495226@qq.com"]
+    receivers = [sendTo]
     try:
         smtpObj = smtplib.SMTP()
         smtpObj.connect("smtp.stu.neu.edu.cn", "25")
-        state = smtpObj.login("20154409@stu.neu.edu.cn", "606129")
+        state = smtpObj.login(sender, "606129")
         msg = MIMEText(contents)
-        msg['Subject'] = '爱你没有其他理由'
-        msg['From'] = "20154409@stu.neu.edu.cn"
-        msg['To'] = "601495226@qq.com"
+        msg['Subject'] = subjects
+        msg['From'] = sender
+        msg['To'] = sendTo
         if state[0] == 235:
             smtpObj.sendmail(sender, receivers, msg.as_string())
             print "邮件发送成功"
