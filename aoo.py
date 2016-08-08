@@ -2,38 +2,28 @@
 import sys,time,re,json,urllib,Image
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
-
-def WebView(urls):
+def Post(urls,data):
     import urllib2
-    # request=urllib2.Request(urls)
+    request = urllib2.Request(urls,data)
+    res=urllib2.urlopen(request,timeout=10)
+    if res.getcode()!=200:
+        return 'There is something Wrong'
+    return res.read()
+def Get(urls):
+    import urllib2
     web=urllib2.urlopen(urls)
     return web.read().decode('gbk').encode('utf-8')
-l=['123']
-def see(dirs):
-    im = Image.open(dirs)
-    imgry = im.convert('L')
-    threshold = 140
-    table = []
-    for i in range(256):
-        if i < threshold:
-            table.append(0)
-        else:
-            table.append(1)
-    out = imgry.point(table,'1')
-    print type(out)
-    print out
+l=[]
+num = 1
 while True:
-    ff = WebView('http://202.118.31.197/ACTIONLOGON.APPPROCESS?mode=1&applicant=ACTIONQUERYBASESTUDENTINFO')
+    ff = Get('http://202.118.31.197/ACTIONLOGON.APPPROCESS?mode=3')
     ran = re.findall('<img src="(.+?)" width="55"',ff)[0]
     ImageUrl = 'http://202.118.31.197/'+ran
-    FileName = ran[42:]+'.jpg'
-    # FileName = '1'
-    # for i in l:
-    #     if i==FileName:
-    #         print i
-    #         print l
-    #         exit()
-    # l.append(FileName)
-    lj = '/Users/FANGs/Desktop/python/image/'+FileName
-    print urllib.urlretrieve(ImageUrl,lj)[0]
-    see(lj)
+    # FileName = ran[42:]+'.jpg'
+    FileName = str(num)+'.jpg'
+    num+=1
+    address = '/Users/FANGs/Desktop/pic/'+FileName
+    print urllib.urlretrieve(ImageUrl,address)[0]
+# jj = '8Eui'
+# f = Post("http://202.118.31.197/ACTIONLOGON.APPPROCESS?mode=3","WebUserNO=20154409&Password=606129&Agnomen="+jj+"&submit.x=20&submit.y=11")
+# print f

@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*
-import sys,re
-reload(sys)
-sys.setdefaultencoding( "utf-8" )
 num_0=[
 0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1300,6 +1296,4 @@ chr_Z=[
 0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,
 ]
-ch1 = "ABCDEFGHIJKLMNPQRSTUVWXYZ"
-for i in ch1:
-    print '"'+i+'":chr_'+i+',',
+data = {"0":num_0,"1":num_1,"2":num_2,"3":num_3,"4":num_4,"5":num_5,"6":num_6,"7":num_7,"8":num_8,"9":num_9,"a":chr_a, "b":chr_b, "c":chr_c, "d":chr_d, "e":chr_e, "f":chr_f, "g":chr_g, "h":chr_h, "i":chr_i, "j":chr_j, "k":chr_k, "m":chr_m, "n":chr_n, "p":chr_p, "q":chr_q, "r":chr_r, "s":chr_s, "t":chr_t, "u":chr_u, "v":chr_v, "w":chr_w, "x":chr_x, "y":chr_y, "z":chr_z,"A":chr_A, "B":chr_B, "C":chr_C, "D":chr_D, "E":chr_E, "F":chr_F, "G":chr_G, "H":chr_H, "I":chr_I, "J":chr_J, "K":chr_K, "L":chr_L, "M":chr_M, "N":chr_N, "P":chr_P, "Q":chr_Q, "R":chr_R, "S":chr_S, "T":chr_T, "U":chr_U, "V":chr_V, "W":chr_W, "X":chr_X, "Y":chr_Y, "Z":chr_Z}
