@@ -76,7 +76,7 @@ while True:
     subject = []
     lesson = []
     for i in r[0]:
-        if i.name=='td':
+        if type(r[0])==type(i):
             subject.append(i.string)
     for i in r:
         k=0
