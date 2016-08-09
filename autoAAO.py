@@ -10,11 +10,7 @@ from PIL import Image
 from PIL import ImageEnhance
 from bs4 import BeautifulSoup
 import mdata
-n = 20150000
-while True:
-    if n>20150000:
-        break
-    n+=1
+def getScore(u,p):
     headers={
     'User-Agent': 'youGuessWhat',
     }
@@ -55,41 +51,44 @@ while True:
         verifyCode+=chrr
     # print "辅助输入验证码完毕:",verifyCode
 
-    user = 20154409
-    password = 606129
+    user = u
+    password = p
     data= {
     'WebUserNO':str(user),
     'Password':str(password),
     'Agnomen':verifyCode,
     }
     t = s.post(url,data=data,headers=headers).text
-    if re.findall("images/Logout2",t)!=[]:
-        print '登录成功',re.findall('!&nbsp;(.+?)&nbsp;',t)[0]
-    else:
+    if re.findall("images/Logout2",t)==[]:
         print '登录失败',re.findall('alert((.+?));',t)[1][1][2:-2]
-    # print s.get('http://202.118.31.197/ACTIONQUERYBASESTUDENTINFO.APPPROCESS?mode＝3').text #学籍信息
-    score = s.get('http://202.118.31.197/ACTIONQUERYSTUDENTSCORE.APPPROCESS',headers=headers).text #成绩单
-    score = BeautifulSoup(score, "lxml")
-    table = score.html.body.table
-    people = table.find_all(attrs={'height' : '36'})[0].string
-    r = table.find_all('table',attrs={'align' : 'left'})[0].find_all('tr')
-    subject = []
-    lesson = []
-    for i in r[0]:
-        if type(r[0])==type(i):
-            subject.append(i.string)
-    for i in r:
-        k=0
-        temp = {}
-        for j in i:
-            if j.name=='td':
-                temp[subject[k]] = j.string
-                k+=1
-        lesson.append(temp)
-    lesson.pop()
-    lesson.pop(0)
-    for i in lesson:
-        for j in i:
-            print i[j],
-        print
-    s.get('http://202.118.31.197/ACTIONLOGOUT.APPPROCESS',headers=headers).text #注销
+    else:
+        print '登录成功',re.findall('!&nbsp;(.+?)&nbsp;',t)[0]
+        # print s.get('http://202.118.31.197/ACTIONQUERYBASESTUDENTINFO.APPPROCESS?mode＝3').text #学籍信息
+        score = s.get('http://202.118.31.197/ACTIONQUERYSTUDENTSCORE.APPPROCESS',headers=headers).text #成绩单
+        score = BeautifulSoup(score, "lxml")
+        table = score.html.body.table
+        people = table.find_all(attrs={'height' : '36'})[0].string
+        r = table.find_all('table',attrs={'align' : 'left'})[0].find_all('tr')
+        subject = []
+        lesson = []
+        for i in r[0]:
+            if type(r[0])==type(i):
+                subject.append(i.string)
+        for i in r:
+            k=0
+            temp = {}
+            for j in i:
+                if type(r[0])==type(j):
+                    temp[subject[k]] = j.string
+                    k+=1
+            lesson.append(temp)
+        lesson.pop()
+        lesson.pop(0)
+        # for i in lesson:
+        #     for j in i:
+        #         print i[j],
+        #     print
+        return lesson
+        s.get('http://202.118.31.197/ACTIONLOGOUT.APPPROCESS',headers=headers).text #注销
+# l = getScore(20154409,606129)
+# print l
