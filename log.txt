@@ -1,0 +1,7 @@
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTP connection (1): 202.118.31.197
+DEBUG:requests.packages.urllib3.connectionpool:"GET /ACTIONLOGON.APPPROCESS?mode=4 HTTP/1.1" 200 2361
+DEBUG:requests.packages.urllib3.connectionpool:"GET /ACTIONVALIDATERANDOMPICTURE.APPPROCESS?id=19.38699013122528 HTTP/1.1" 200 None
+DEBUG:requests.packages.urllib3.connectionpool:"POST /ACTIONLOGON.APPPROCESS?mode=4 HTTP/1.1" 200 1302
+DEBUG:root:登录成功 方悦成 20154409 606129
+
+DEBUG:requests.packages.urllib3.connectionpool:"GET /ACTIONQUERYSTUDENTSCORE.APPPROCESS HTTP/1.1" 200 9679
