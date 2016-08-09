@@ -6,6 +6,7 @@ import re
 import requests
 import urllib
 import io
+import json
 from PIL import Image
 from PIL import ImageEnhance
 from bs4 import BeautifulSoup
@@ -60,9 +61,10 @@ def getScore(u,p):
     }
     t = s.post(url,data=data,headers=headers).text
     if re.findall("images/Logout2",t)==[]:
-        print '登录失败',re.findall('alert((.+?));',t)[1][1][2:-2]
+        print '[0,"'+re.findall('alert((.+?));',t)[1][1][2:-2]+'"]',u,p
+        return '[0,"'+re.findall('alert((.+?));',t)[1][1][2:-2]+'"]'
     else:
-        print '登录成功',re.findall('!&nbsp;(.+?)&nbsp;',t)[0]
+        print '登录成功',re.findall('!&nbsp;(.+?)&nbsp;',t)[0],u,p
         # print s.get('http://202.118.31.197/ACTIONQUERYBASESTUDENTINFO.APPPROCESS?mode＝3').text #学籍信息
         score = s.get('http://202.118.31.197/ACTIONQUERYSTUDENTSCORE.APPPROCESS',headers=headers).text #成绩单
         score = BeautifulSoup(score, "lxml")
@@ -88,7 +90,7 @@ def getScore(u,p):
         #     for j in i:
         #         print i[j],
         #     print
-        return lesson
+        return json.dumps(lesson)
         s.get('http://202.118.31.197/ACTIONLOGOUT.APPPROCESS',headers=headers).text #注销
 # l = getScore(20154409,606129)
-# print l
+# print type(l)
