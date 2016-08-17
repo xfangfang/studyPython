@@ -1,15 +1,22 @@
 
-import json,urllib
-def Get(urls):
-    import urllib2
-    web=urllib2.urlopen(urls)
-    return web.read().decode('gbk').encode('utf-8')
-n =0
+import json,requests
+import imagehash,os
+from PIL import Image
+
+
+s = requests.Session()
+f = s.get("http://ipgw.neu.edu.cn:8800/site/captcha?refresh=1").text
+f = json.loads(f)
+url = "http://ipgw.neu.edu.cn:8800/"+f['url']
+
+n =1
 while n<=100:
-    n+=1
-    print n
-    f = Get("http://ipgw.neu.edu.cn:8800/site/captcha?refresh=1")
-    f = json.loads(f)
-    url = "http://ipgw.neu.edu.cn:8800/"+f['url']
     address = '/Users/FANGs/Desktop/net/'+str(n)+'.png'
-    print urllib.urlretrieve(url,address)[0]
+    pic = s.get(url).content
+    f = open(address,"wb")
+    f.write(pic)
+    f.close()
+    # query = Image.open(address)
+    # h = str(imagehash.dhash(query))
+    # os.rename(address,'/Users/FANGs/Desktop/net/'+h+'.png')
+    n+=1

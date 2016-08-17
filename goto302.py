@@ -26,14 +26,15 @@ f.write(pic.content)
 f.close()
 i = Image.open(ad)
 i.show()
-# print _csrf
-verifyCode = raw_input('输入验证码')
 
-data = {
-'_csrf' : _csrf,
-'LoginForm[username]' : '20154409',
-'LoginForm[password]' : '606123',
-'LoginForm[verifyCode]' : verifyCode,
-}
-r = s.post("http://ipgw.neu.edu.cn:8800/",data=data,headers=headers)
-print r.text
+
+# verifyCode = raw_input('输入验证码')
+#
+# data = {
+# '_csrf' : _csrf,
+# 'LoginForm[username]' : '20154409',
+# 'LoginForm[password]' : '606123',
+# 'LoginForm[verifyCode]' : verifyCode,
+# }
+# r = s.post("http://ipgw.neu.edu.cn:8800/",data=data,headers=headers)
+# print r.text
