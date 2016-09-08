@@ -1,0 +1,192 @@
+<html>
+<head>
+<title>PING POT</title>
+<meta charset="UTF-8">
+<style type="text/css" media="screen">
+
+/*bubble*/
+.lim_clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.lim_clearfloat{*zoom:1}
+.lim_info{padding:3px 15px;}
+.lim_infotip{color:#000000;line-height:1.5;word-wrap:break-word;word-break:break-all;}
+.lim_timediv{margin:0px 0;text-align: center;}
+.lim_time{margin:0px auto;text-align:center;width:65px;line-height: 20px;height: 20px;color:#706f70;font-size: 20px;}
+.lim_dot{ margin:5px auto;color:#000000; line-height:1.5;word-wrap:break-word;word-break:break-all;letter-spacing: 1px;}
+.lim_operator{position:relative;padding:3px 30px 3px 15px;*zoom:1}
+.lim_visitor{position:relative;padding:3px 15px 3px 30px;*zoom:1}
+
+.lim_operator .lim_bubble{margin:5px;float:left;border:3px solid #a5d01b; font-size: 40px;}
+.lim_visitor .lim_bubble{margin:5px;float:right;border:3px solid #d4d4d4;font-size: 40px;}
+ /*font-size: 13px;*/
+.lim_bubble{position:relative;z-index:1;padding:6px;-khtml-border-radius:12px;-ms-border-radius:12px;-o-border-radius:12px;-moz-border-radius:12px;-webkit-border-radius:12px;border-radius:12px;*zoom:1;
+	  box-shadow: 0px 1px 1px rgba(255,255,255,.8) inset;
+      -moz-box-shadow:0px 1px 1px #fff inset;
+      -webkit-box-shadow:0px 1px 1px #fff inset;}
+.lim_radius{position:absolute;z-index:999;width:10px;height:8px;overflow:hidden;}
+
+.lim_tale{position: absolute;width:12px;height:9px;overflow: hidden !important;top:10px;z-index:2;border-top-style:solid;border-top-width: 1px ;}
+
+.lim_operator .lim_tale{left:4px;background-color:#c8f064;border-color:#a5d01b;}
+.lim_visitor .lim_tale{right:4px;background-color: #f8f8f8;border-color:#d4d4d4;}
+
+.lim_operator #radiusborder {position: absolute;background-color: white;top: -28px;left: -95px;height: 160px;width: 160px;
+	border-top-style:solid;border-top-width: 3px ;border-right-style:solid;border-right-width: 3px ;border-top-right-radius: 154px;border-color:#a5d01b;
+}
+.lim_visitor #radiusborder {position: absolute;background-color: white;top: -28px;right: -95px;height: 160px;width: 160px;
+	border-top-style:solid;border-top-width: 3px ;border-left-style:solid;border-left-width: 3px ;border-top-left-radius: 154px;border-color:#d4d4d4;
+}
+
+
+</style>
+<style type="text/css" media="screen">
+ html{font-size: 60px;}
+ #log { width: 100%;font-size: 0.8rem;background:#f8f8f8;color:#999; margin: auto; height:auto; border:1px ;overflow:auto;}
+ #msg {  background:orange;color:white;width:330px;margin: 0;}
+ #name{  border-bottom:0px }
+ #send {background:#ddd; position:fixed; bottom: 2;}
+    body {
+      text-align:center;
+      background-color: #fcfcfc;
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    h1 {color:white;background:orange; margin: 8 auto; letter-spacing: -1px; line-height: 1.2rem; font-size: 1.2rem; font-weight: 100; text-shadow: 0 1px 0 #fff; }
+    button{font-size: 0.8rem;}
+    input{
+      font-size: 0.6rem;
+      text-align: center;
+      color:#505050;
+      border:0px;
+      border-bottom:1px solid #d0d0d0;
+      background-color:transparent;
+      }
+      input:focus {    outline: 0;}
+  </style>
+<script>
+  var socket;
+  function init(d){
+    var t = "";
+    if(d==0){
+      while(t==""){
+        t=prompt("请输入您的昵称","")
+      }
+      $("name").value=t;
+      $("msg").focus();
+    }
+    $("log").style.width=document.body.offsetWidth;
+    var host = "ws://115.28.207.130:1234/";
+    // var host = "ws://127.0.0.1:1234/";
+    try{
+      socket = new WebSocket(host);
+      socket.onopen = function(msg){
+        log("Get Connection!");
+        try{ socket.send(t+":我上线了！"); } catch(ex){ log(ex); }
+      }
+      socket.onmessage = function(msg){ log(msg.data); };
+      socket.onclose   = function(msg){
+        // socket.close();
+        log("失去连接 尝试刷新...");
+        // var s = 0;
+        // setTimeout(function () {}, 1000);
+        // var tryTime=d;
+        // if (tryTime < 10) {
+        //   setTimeout(function () {
+        //     socket = null;
+        //     tryTime++;
+        //     init(tryTime);
+        //   }, 3000);
+        // }
+       };
+    }
+    catch(ex){ log(ex); }
+  }
+
+  function send(){
+   $("log").style.width="auto";
+  var txt,msg,name,na;
+  txt = $("msg");
+  na = $("name");
+  name = na.value;
+  if(!name||name=="NICKNAME"){
+    alert("请在左边写个昵称");
+    na.focus();
+    return;
+  }
+  msg = txt.value;
+  if(!msg||msg=="MESSAGE"){
+    // alert("消息不能为空");
+    txt.focus();
+    return;
+  }
+  txt.value="";
+  txt.focus();
+  try{ socket.send(name+":"+msg); } catch(ex){ log(ex); }
+}
+
+  window.onbeforeunload=function(){
+    var na,name;
+    alert("连接即将断开");
+    na = $("name");
+    name = na.value;
+    if(name == "NICKNAME"){
+      name= "SOMEONE";
+    }
+    try{
+        socket.send(name+' quit');
+        // socket.close();
+    }
+    catch(ex){
+        log(ex);
+    }
+  }
+
+  function $(id){ return document.getElementById(id); }
+  function log(msg){
+    var data = msg.split(":");
+    var myDate = new Date();
+    var a,b,c,t;
+    a = myDate.getHours();
+    b = myDate.getMinutes();
+    c = myDate.getSeconds();
+    t = String(a)+":"+String(b)+":"+String(c)
+    if (data.length==2){
+      if(data[0]==$("name").value){
+
+      var a = ' <div id="" class="lim_visitor lim_clearfloat "><div class="lim_bubble"><div class="lim_time show_right">'+t+'</div><div class="lim_dot ">'+data[1]+'</div></div><div class="lim_tale"><div id="radiusborder"></div></div></div>'
+      $("log").innerHTML+= a;
+      }
+      else{
+        a = '<div id="" class="lim_operator lim_clearfloat "><div class="lim_bubble"><div class="lim_time show_left">'+t+'</div><div class="lim_dot "><p class="robotinfo">'+msg+'</p></div></div><div class="lim_tale" ><div id="radiusborder"></div></div></div>'
+        $("log").innerHTML+= a;
+      }
+    }
+    else{
+      a = '<div id="" class="lim_operator lim_clearfloat "><div class="lim_bubble"><div class="lim_time show_left">'+t+'</div><div class="lim_dot "><p class="robotinfo">'+msg+'</p></div></div><div class="lim_tale" ><div id="radiusborder"></div></div></div>'
+      $("log").innerHTML+= a;
+    }
+    $("log").scrollTop = $("log").scrollHeight;
+   }
+  function onkey(event){ if(event.keyCode==13){ send(); } }
+
+</script>
+
+</head>
+
+
+
+<body onload="init(0)">
+    <div id="headd" style="height:1rem;">
+      <h1>PingPot</h1>
+    </div>
+  <div style="height:92%;">
+    <div id="log" style="height:90%;">
+    </div>
+    <div id="send" style="height:8%;line-height:36px;">
+      <input style="height:100%;width:10%;" readonly="readonly" id="name"  value="NICKNAME" onkeypress="onnamekey(event)"; style="color:#999999">
+      <input id="msg"  style="height:100%;width:70%;" value="MESSAGE" onkeypress="onkey(event)"; onFocus="if(value==defaultValue){value='';this.style.color='#fff'}" onBlur="if(!value){value=defaultValue;this.style.color='#eee'}" style="color:white">
+      <button style="height:90%;width:10%;font-size:0.5rem" onclick="send()">send</button>
+     </div>
+   </div>
+</body>
+
+</html>
