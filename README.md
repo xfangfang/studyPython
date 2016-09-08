@@ -1,2 +1,2 @@
 # studyPython
-learn python everyday
+记录了本人学习python过程中写的诸多小脚本，包括爬虫搜题解自动提交到poj，简单的验证码识别，模拟登陆东北大学校园网，教务处，钓鱼Wi-Fi等等，代码已经分类储存好，时时更新中。
