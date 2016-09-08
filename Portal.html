@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>Portal 认证</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/static/weui.min.css"/>
+    <link rel="stylesheet" href="/static/mobile.css"/>
+</head>
+<body ontouchstart>
+<div class="container js_container">
+    <div class="page">
+        <!-- <a class="weui_cell js_cell weui-wechat" href="javascript:;" data-id="wifi"></a> -->
+        <div class="hd">
+            <h1 class="page_title">IP控制网关</h1>
+        </div>
+        <div class="weui_toptips weui_warn js_tooltips"></div>
+        <div class="bd spacing">
+            <div class="weui_cells_title cells_title">使用账号和密码认证</div>
+            <div class="weui_cells weui_cells_form">
+                <!-- if 开始 -->
+                                <!-- if 结束 -->
+                <!-- if 开始 -->
+                                    <form name="form2" action="infor" method="post" onsubmit="return check(this)">
+                        <input type="hidden" name="action" value="login">
+                        <input type="hidden" name="ac_id" value="1">
+                        <input type="hidden" name="user_ip" value="">
+                        <input type="hidden" name="nas_ip" value="">
+                        <input type="hidden" name="user_mac" value="">
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" name="username" type="text" value="" placeholder="请输入用户名"/>
+                            </div>
+                        </div>
+                        <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input class="weui_input" name="password" type="password" value="" placeholder="请输入密码" AUTOCOMPLETE="OFF" />
+                            </div>
+                        </div>
+                        <div class="weui_cell weui_cell_switch">
+                            <div class="weui_cell_hd weui_cell_primary">记住密码</div>
+                            <div class="weui_cell_ft">
+                                <input class="weui_switch" name="save_me" type="checkbox" value="0"  />
+                            </div>
+                        </div>
+                        <div class="weui_btn_area">
+                            <input type="submit" class="weui_btn weui_btn_primary" value="登录" />
+                            <a class="weui_btn weui_btn_warn" onclick="document.form2.action.value='logout';document.form2.submit();">注销</a>
+                        </div>
+                    </form>
+                                <!-- if 结束 -->
+            </div>
+            <div class="weui_cells_tips">
+                <a class="weui_cell js_cell weui-tips" href="javascript:;" data-id="help">注册、自服务以及忘记密码>></a>
+            </div>
+        </div>
+    </div>
+    <div class="weui_cells_tips footer">&copy; 深澜软件 1998-2016</div>
+</div>
+<script type="text/html" id="tpl_wifi">
+    <div class="page">
+        <div class="weui-follow">
+            <div class="weui-banner">
+                <img class="weui-banner-bg" src="../images/phone.background.jpg" alt=""/>
+                <div class="weui-img-shadow"></div>
+                <div class="weui-logo">
+                    <img class="weui-logo-img" src="../images/phone.logo.png" alt=""/>
+                    <p class="weui-logo-name"></p>
+                    <p class="weui-logo-welcome">欢迎您</p>
+                </div>
+            </div>
+            <div class="weui-attention">
+                <p class="weui-attention-txt">欢迎使用微信连Wi-Fi</p>
+                <a class="weui-attention-btn" id="callWechartBrowser">一键打开微信连Wi-Fi</a>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tpl_phone">
+    <div class="page">
+        <div class="hd">
+            <h1 class="page_title">Phone Auth</h1>
+        </div>
+        <div class="bd spacing">
+            <div class="weui_cells_title cells_title">使用手机和验证码认证</div>
+            <form name="form4">
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell weui_vcode">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" name="phone" id="phoneNum" type="tel" placeholder="请输入手机号"/>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <a class="weui_btn weui_btn_warn" id="getVerifyCode">获取验证码</a>
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input class="weui_input" name="verifyCode" type="tel" placeholder="请输入验证码" AUTOCOMPLETE="OFF" />
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cells_tips">请填写您手机收到的验证码进行认证</div>
+                <div class="weui_btn_area">
+                    <a class="weui_btn weui_btn_primary" id="submitPhoneAuth">登陆</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="tpl_help">
+    <div class="page">
+        <div class="hd">
+            <h1 class="page_title">帮助</h1>
+        </div>
+        <div class="weui_grids">
+            <a href="srun_portal_mobile5-dx.html?ac_id=1" class="weui_grid" target="_blank">
+                <div class="weui_grid_icon">
+                    <img src="./images/icon_nav_button.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    注册
+                </p>
+            </a>
+            <a href="http://202.118.1.88:8800" class="weui_grid" target="_blank">
+                <div class="weui_grid_icon">
+                    <img src="./images/icon_nav_cell.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    自服务
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid">
+                <div class="weui_grid_icon">
+                    <img src="./images/icon_nav_toast.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    找回密码
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid">
+                <div class="weui_grid_icon">
+                    <img src="./images/icon_nav_dialog.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    其他帮助
+                </p>
+            </a>
+        </div>
+    </div>
+</script>
+<script src="http://ipgw.neu.edu.cn:804/js/zepto.min.js"></script>
+<script src="http://ipgw.neu.edu.cn:804/js/wechat_portal.js"></script>
+<script src="http://ipgw.neu.edu.cn:804/js/wechatutil.js"></script>
+<script src="http://ipgw.neu.edu.cn:804/js/srun_portal.js"></script>
+<script type="text/javascript">
+        var token = 'boriwizcv2y6h5t4v5zg';
+    var ac_id = '1';
+    var t = '1471743442';
+    var sign = 'f8ba69d5154f5b255ca23a9a7f778cb8'
+    var server_addr = '202.118.1.88';
+    document.addEventListener('visibilitychange', putNoResponse, false);
+</script>
+</body>
+</html>

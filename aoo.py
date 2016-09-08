@@ -26,4 +26,3 @@ while True:
     print urllib.urlretrieve(ImageUrl,address)[0]
 # jj = '8Eui'
 # f = Post("http://202.118.31.197/ACTIONLOGON.APPPROCESS?mode=3","WebUserNO=20154409&Password=606129&Agnomen="+jj+"&submit.x=20&submit.y=11")
-# print f

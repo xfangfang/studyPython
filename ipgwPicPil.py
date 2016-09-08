@@ -12,7 +12,6 @@ url = "http://ipgw.neu.edu.cn:8800/"+f['url']
 
 def convent (pic):
     x,y = pic.size
-
     l = [[0 for j in range(y+5)] for i in range(x+5)]
     for i in range(x):
         for j in range(y):
@@ -46,7 +45,6 @@ for svd in range(1):
     print svd
     address = '/Users/FANGs/Desktop/net/'+str(svd)+'.png'
     im = Image.open(io.BytesIO(s.get(url).content))
-    # im = convent(im)
     x,y = im.size
     l = []
     for i in range(x):
@@ -103,6 +101,7 @@ for svd in range(1):
         right[i] = p
         p = im.crop((left[i]-2,0,right[i]+2,50))
         p = p.resize((25, 50), Image.ANTIALIAS)
+        p = convent(p)
         p.save('/Users/FANGs/Desktop/test/'+str(i)+'.png')
 
 p = svm_model_test('/Users/FANGs/Desktop/test/')

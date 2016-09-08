@@ -28,7 +28,7 @@ def test(ad):
     f.close()
     return ad+"data.txt"
 def train(ad):
-    f = open(ad+"data.txt",'w')
+    f = open(ad+"../data.txt",'w')
     n=0
     for d in glob.glob(ad+"*"):
         for imd in glob.glob(d+ "/*.png"):
@@ -41,7 +41,7 @@ def train(ad):
             f.write("\n")
         n+=1
     f.close()
-    return ad+"data.txt"
+    return ad+"../data.txt"
 def train_svm_model(ad):
     y, x = svm_read_problem(train(ad))
     model = svm_train(y, x)
@@ -55,9 +55,9 @@ def svm_model_test(ad):
     cnt = 0
     p = ""
     for item in p_label:
-        p+=a[int(item-1)]
+        p+=a[int(item)]
     return p
 
 
 # train_svm_model('/Users/FANGs/Desktop/net/')
-# print svm_model_test('/Users/FANGs/Desktop/test/')
+# print svm_model_test('/Users/FANGs/Desktop/net/a/')

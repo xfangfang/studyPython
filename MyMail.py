@@ -18,6 +18,3 @@ def sendMail(contents="null",sendTo="2553041586@qq.com",subjects="null"):
             smtpObj.quit()
     except smtplib.SMTPException, e:
         print str(e)
-
-c = "徐滔我爱你"
-sendMail(c)
