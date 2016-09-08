@@ -1301,5 +1301,5 @@ chr_Z=[
 0,0,0,0,0,0,0,0,0,0,0,0,0,
 ]
 ch1 = "ABCDEFGHIJKLMNPQRSTUVWXYZ"
-for i in ch1:
-    print '"'+i+'":chr_'+i+',',
+d = {i:'chr_'+i for i in ch1}
+print d

@@ -1,0 +1,364 @@
+body,
+html {
+height:100%;
+	-webkit-tap-highlight-color:transparent
+}
+
+.page,
+body {
+	background-color:#FBF9FE
+}
+
+.container,
+.page {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0
+}
+
+.container {
+	overflow:hidden
+}
+
+.page {
+	overflow-y:auto;
+	-webkit-overflow-scrolling:touch
+}
+
+.hd {
+	padding:0.5em 0
+}
+
+@-webkit-keyframes slideIn {
+	from {
+	-webkit-transform:translate3d(100%,0,0);
+	transform:translate3d(100%,0,0)
+	}
+
+	to {
+	-webkit-transform:translate3d(0,0,0);
+	transform:translate3d(0,0,0)
+}
+
+
+}
+
+@keyframes slideIn {
+	from {
+	-webkit-transform:translate3d(100%,0,0);
+	transform:translate3d(100%,0,0)
+	}
+
+	to {
+	-webkit-transform:translate3d(0,0,0);
+	transform:translate3d(0,0,0)
+}
+
+
+}
+
+@-webkit-keyframes slideOut {
+	from {
+	-webkit-transform:translate3d(0,0,0);
+	transform:translate3d(0,0,0)
+	}
+
+	to {
+	-webkit-transform:translate3d(100%,0,0);
+	transform:translate3d(100%,0,0)
+}
+
+
+}
+
+@keyframes slideOut {
+	from {
+	-webkit-transform:translate3d(0,0,0);
+	transform:translate3d(0,0,0)
+	}
+
+	to {
+	-webkit-transform:translate3d(100%,0,0);
+	transform:translate3d(100%,0,0)
+}
+
+
+}
+
+.page.slideIn {
+-webkit-animation:slideIn .2s forwards;
+animation:slideIn .2s forwards
+}
+
+.page.slideOut {
+-webkit-animation:slideOut .2s forwards;
+animation:slideOut .2s forwards
+}
+
+.weui-follow {
+	background-color:#FFF;
+	height:100%
+}
+
+.weui-banner {
+	overflow:hidden;
+	max-height:314px;
+	position:relative;
+	text-align:center;
+	line-height:1;
+	font-size:0
+}
+
+.weui-banner-bg {
+	width:100%
+}
+
+.weui-img-shadow {
+	width:100%;
+	min-height:174px;
+	display:block;
+	position:absolute;
+	bottom:0;
+	background:#000;
+	background:-webkit-gradient(linear,
+	left top,
+	left bottom,
+	color-stop(0,rgba(0,0,0,0)),
+	color-stop(1,rgba(0,0,0,.4)));
+	background:-moz-linear-gradient(center top,rgba(0,0,0,0) 0,rgba(0,0,0,.4) 100%)
+}
+
+.weui-logo {
+	position:absolute;
+	top:45px;
+	width:100%
+}
+.weui-logo-img {
+	width:83px;
+	display:block;
+	margin:0 auto;
+	-webkit-border-radius:50px;
+	-moz-border-radius:50px;
+	border-radius:50px;
+	-webkit-background-clip:padding-box;
+	-moz-background-clip:padding-box;
+	background-clip:padding-box
+}
+.weui-logo-name {
+	color:#FFF;
+	font-size:22px;
+	line-height:20px;
+	text-align:center;
+	margin-top:30px;
+	margin-bottom:0;
+	text-shadow:1px 1px 1px rgba(0,0,0,.4);
+	-webkit-text-shadow:1px 1px 1px rgba(0,0,0,.4)
+}
+.weui-logo-welcome {
+	color:#FFF;
+	font-size:22px;
+	line-height:20px;
+	text-align:center;
+	margin-top:18px;
+	text-shadow:1px 1px 1px rgba(0,0,0,.4);
+	-webkit-text-shadow:1px 1px 1px rgba(0,0,0,.4)
+}
+
+.weui-attention {
+	padding-bottom:15px;
+	text-align:center
+}
+.weui-attention-txt {
+	margin:45px 0;
+	text-align:center;
+	font-size:16px
+}
+.weui-attention-btn {
+	display:inline-block;
+	width:290px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-background-clip:padding-box;
+	-moz-background-clip:padding-box;
+	background-clip:padding-box;
+	height:40px;
+	line-height:40px;
+	background-color:#04be01;
+	color:#fff;
+	text-align:center;
+	font-size:16px
+}
+
+@media screen and (min-width:1900px) {
+	.weui-banner {
+		max-height:700px
+	}
+	.weui-logo {
+		top:400px
+	}
+}
+
+@media screen and (min-width:1200px)and (max-width:1900px) {
+	.weui-banner {
+		max-height:545px
+	}
+	.weui-logo {
+		top:300px
+	}
+}
+
+@media screen and (min-width:980px)and (max-width:1200px) {
+	.weui-banner {
+		max-height:380px
+	}
+	.weui-logo {
+		top:140px
+	}
+}
+@media screen and (min-width:750px)and (max-width:980px) {
+	.weui-banner {
+		max-height:508px
+	}
+	.weui-logo {
+		top:120px
+	}
+}
+
+@media screen and (max-height:480px)and (orientation:portrait) {
+	.weui-attention-txt {
+		margin:20px 0
+	}
+}
+
+.weui-tips {
+	padding: 0;
+	color: #888;
+}
+
+.footer {
+	bottom: 0;
+	position: fixed;
+}
+
+.font-black {
+	color: black;
+}
+
+.right-bottom {
+	bottom: 2px;
+	position: absolute;
+	right: 0;
+}
+
+.weui-wechat {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	display: block;
+	top: 0;
+	right: 0;
+	background-image: url(https://t.alipayobjects.com/images/rmsweb/T1el0hXaJbXXXXXXXX.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+	z-index: 101;
+	-webkit-transition: background-position .2s cubic-bezier(0.25,.5,.5,.9);
+	-moz-transition: background-position .2s cubic-bezier(0.25,.5,.5,.9);
+	transition: background-position .2s cubic-bezier(0.25,.5,.5,.9);
+}
+
+.page_desc {
+	text-align:center;
+	color:#888;
+	font-size:14px
+}
+
+.bd.spacing {
+	padding:0 15px
+}
+
+.page_title {
+	text-align:center;
+	font-size:34px;
+	color:#3CC51F;
+	font-weight:400;
+	margin:0 15%
+}
+
+.page.button .page_title,
+.page.cell .page_title {
+color:#225FBA
+}
+
+.global_navs {
+background-color:transparent
+}
+
+.page.article,
+.page.icons{
+background-color:#FFF
+}
+
+.global_navs .cell {
+padding-top:.5em;
+padding-bottom:.5em
+}
+
+.global_navs .icon_nav {
+width:28px;
+height:28px;
+display:block;
+margin-right:.7em
+}
+
+.page.button .bd {
+padding:0 15px
+}
+
+.page.button .button_sp_area {
+padding:10px 0;
+width:60%;
+margin:0 auto;
+text-align:justify;
+text-justify:distribute-all-lines;
+font-size:0
+}
+
+.page.button .button_sp_area:after {
+display:inline-block;
+width:100%;
+height:0;
+font-size:0;
+margin:0;
+padding:0;
+overflow:hidden;
+content:"."
+}
+
+.page.cell .bd {
+padding-bottom:30px
+}
+
+.page.icons {
+text-align:center
+}
+
+.page.icons .page_title {
+color:#3E24BD
+}
+
+.page.icons .bd {
+padding:30px 0;
+text-align:center
+}
+
+.page.icons .icon_sp_area {
+padding:10px 20px;
+text-align:left
+}
+
+.page.icons i {
+margin:0 5px 10px
+}
