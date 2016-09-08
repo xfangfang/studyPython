@@ -13,8 +13,14 @@ def loginoff(ip):
     'action':'auto_logout',
     'user_ip':ip,
     }
-    c = s.post("http://ipgw.neu.edu.cn:804/srun_portal_pc.php",data = data)
-    return c
+    c = s.post("http://ipgw.neu.edu.cn:804/srun_portal_pc.php",data = data).text
+    if c.find('网络已断开')!=-1:
+        print '网络已断开'
+        return '网络已断开'
+    elif c.find('您似乎未曾连接到网络')!=-1:
+        print '您似乎未曾连接到网络'
+        return '您似乎未曾连接到网络'
+
     # print c
 def login(username,password):
     data = {
@@ -64,8 +70,10 @@ def getInfor():
     print "ip地址："+data[5]
 
 if __name__ == '__main__':
-    # login('20154316','000000')
-    print loginoff('118.202.44.207').text
+    a = login('20154316','000000')
+    if a == '网络已连接':
+        getInfor()
+    loginoff('118.202.41.48')
     # print help(random)
     # l = len(sys.argv[1:])
     # if(l!=2):
