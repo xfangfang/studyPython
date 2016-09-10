@@ -62,9 +62,9 @@ class IPGW:
         }
         r = self.s.post(url,data=data).text
         return r
-    def detail():
+    def detail(self):
         url = 'http://ipgw.neu.edu.cn:8800/log/detail/index?page=12&per-page=10'
-        res = s.get(url).text
+        res = self.s.get(url).text
         return res
 
 if __name__ == "__main__":
@@ -78,6 +78,7 @@ if __name__ == "__main__":
     aa.setPwdandUser(username,password)
     v = raw_input('>输入验证码\n>')
     res = json.loads(aa.login(v))
+    de = []
     if res[0]==1:
         data = BeautifulSoup(res[1],"lxml")
         l = data.find_all('div' ,attrs={'class':"panel-body"})
@@ -86,16 +87,6 @@ if __name__ == "__main__":
         baseInfo = l[0].find_all('li')
         for i in baseInfo:
             print str(i.text).replace("	","").replace(" ","").replace("\n","")[6:]
-        print '------在线信息---------'
-
-        devices = l[1].table
-        devices = devices.find_all('tr')
-        for i in range(1,len(devices)):
-            d = BeautifulSoup(str(devices[i]),"lxml")
-            f = d.find_all('td')
-            print f[len(f)-1].a['id']
-            for j in range(len(f)-1):
-                print f[j].text.replace("	","").replace("\n","")
 
         print '------产品信息---------'
         a = l[2].table
@@ -105,6 +96,27 @@ if __name__ == "__main__":
             f = d.find_all('td')
             for j in f:
                 print j.text.replace("	","").replace(" ","").replace("\n","")
+        print '------在线信息---------'
+
+        devices = l[1].table
+        devices = devices.find_all('tr')
+        for i in range(1,len(devices)):
+            d = BeautifulSoup(str(devices[i]),"lxml")
+            f = d.find_all('td')
+            de.append(f[len(f)-1].a['id'])
+            print '\n设备编号',len(de)," ",
+            # print f[len(f)-1].a['id']
+            for j in range(len(f)-1):
+                print f[j].text.replace("	","").replace("\n","")," ",
+        f = raw_input("\n输入在线设备代号，退出设备，输入0退出程序\n")
+        if(f=='0'):
+            exit()
+        if(int(f)>len(de)):
+            print "设备代号输入错误\n"
+        else:
+            print de[int(f)-1]
+            print aa.drop(de[int(f)-1])
+        print aa.detail()
     else:
         print res[1]
 
