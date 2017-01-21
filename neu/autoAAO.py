@@ -129,17 +129,7 @@ class Student:
         return self.s.get('http://202.118.31.197/ACTIONLOGOUT.APPPROCESS').text
 
 if __name__ == "__main__":
-    # for i in range(20160000,20160010):
-    #     a = Student(i,i)
-    #     r = a.login()
-    #     print r[1]
-    #     if r[0]:
-    #         q = json.loads(a.getInfo())
-    #         for i in q:
-    #             print q[i]
-
-
-    a = Student(20154577,20154577)
+    a = Student(20150000,20150000)
     r = a.login()
     print r[1]
     if r[0]:
@@ -148,12 +138,9 @@ if __name__ == "__main__":
             for j in i:
                 print i[j],
             print
-
         q = json.loads(a.getInfo())
         for i in q:
             print i,q[i]
-
         a.getPic().show()
     a.logoff()
 
-# l = getScore(20154364,973149077)
