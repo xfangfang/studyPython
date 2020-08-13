@@ -42,6 +42,7 @@ num = int(n.group(1))
 
 if num != clientsNumLastTime:
     print(output)
+    saveParm(num)
     send_simple_message(output)
 else:
     print('nothing happend. '+ LOCAL_TIME+'\n')
