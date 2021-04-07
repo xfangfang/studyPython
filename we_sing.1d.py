@@ -1,4 +1,4 @@
-#!/usr/bin/env PYTHONIOENCODING=UTF-8 /Users/fang/.pyenv/shims/python3
+#!/usr/bin/env PYTHONIOENCODING=UTF-8 python3
 
 # xbar Metadata
 # <xbar.title>WeSing 全民K歌</xbar.title>
