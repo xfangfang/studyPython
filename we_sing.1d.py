@@ -1,4 +1,4 @@
-#!/usr/bin/env PYTHONIOENCODING=UTF-8 python3
+#!/usr/bin/env PYTHONIOENCODING=UTF-8 /usr/local/bin/python3
 
 # xbar Metadata
 # <xbar.title>WeSing 全民K歌</xbar.title>
@@ -6,9 +6,9 @@
 # <xbar.author>Fang Yuecheng</xbar.author>
 # <xbar.author.github>xfangfang</xbar.author.github>
 # <xbar.desc>Play songs from WeSing</xbar.desc>
-# <xbar.image>https://raw.githubusercontent.com/15cm/bitbar-plugin/master/aria2/screenshot.png</xbar.image>
+# <xbar.image>https://raw.githubusercontent.com/xfangfang/xfangfang.github.io/master/assets/img/we_sing.png</xbar.image>
 # <xbar.dependencies>python3,requests,requests_futures,playsound</xbar.dependencies>
-# <xbar.abouturl>https://github.com/15cm/bitbar-plugin/tree/master/aria2</xbar.abouturl>
+# <xbar.abouturl>https://xfangfang.github.io/python/019</xbar.abouturl>
 # <xbar.var>string(VAR_ID="64999a87232a308d"): User ID. (String of length 16) </xbar.var>
 
 import re
@@ -449,7 +449,7 @@ def main():
     cmd("--{} PublishTime".format(text), "time", text, refresh=True)
     cmd("--Clear Cache: {}".format(getDirSize(Object.CACHE_PATH)), 'clear', refresh=True)
     print("--Seting UserID | href=xbar://app.xbarapp.com/openPlugin?path={}".format(sys.argv[0]))
-    print("--Help | href=https://xfangfang.github.com")
+    print("--Help | href=https://xfangfang.github.io/python/019")
 
 
 if __name__ == "__main__":
