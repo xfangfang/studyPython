@@ -381,9 +381,9 @@ def checkUpdateTime(setting):
             return player
     return None
 
-def cmd(title, p1, p2='nothing', refresh=False):
+def cmd(title, p1, p2='nothing', refresh=False, color = 'balck'):
     current = int(round(time.time()))
-    print("{} | shell='{}' param1={} param2={} param3={} terminal=false refresh={}".format(title, sys.argv[0], p1, p2, current, refresh))
+    print("{} | shell='{}' param1={} param2={} param3={} terminal=false refresh={} color={}".format(title, sys.argv[0], p1, p2, current, refresh, color))
 
 def main():
     setting = loadSetting()
@@ -431,7 +431,8 @@ def main():
             song_name = "{}: {} {}".format(i+1, Object.timeConverter(song.time), song.title.replace("|", "/"))
         else:
             song_name = "{}: {}".format(i+1, song.title.replace("|", "/"))
-        cmd("--{}".format(song_name), "play", i)
+        color = 'blue' if setting.currentid == song.shareid else 'black'
+        cmd("--{}".format(song_name), "play", i, color = color)
     cmd("Stop", "stop", refresh=True)
     print("Loop - {}".format(setting.loop))
     print("---")
