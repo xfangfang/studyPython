@@ -409,12 +409,12 @@ def main():
             setting.showtime = ( sys.argv[2] == 'Show')
             setting.save()
         elif sys.argv[1] == 'update':
-            player = Player(USERID)
+            player = Player(setting.current_userid)
             player.getPlaylist()
             player.save()
         return
 
-    player = loadPlayer(setting)
+    player = checkUpdateTime(setting)
     if player is None:
         print("Wrong UserID")
         print("---")
