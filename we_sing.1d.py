@@ -416,6 +416,8 @@ def main():
 
     player = checkUpdateTime(setting)
     if player is None:
+        player = loadPlayer(setting)
+    if player is None:
         print("Wrong UserID")
         print("---")
         print("Seting UserID | href=xbar://app.xbarapp.com/openPlugin?path={}".format(sys.argv[0]))
