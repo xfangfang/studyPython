@@ -439,7 +439,7 @@ def main():
             song_name = "{}: {} {}".format(i+1, Object.timeConverter(song.time), song.title.replace("|", "/"))
         else:
             song_name = "{}: {}".format(i+1, song.title.replace("|", "/"))
-        color = 'blue' if setting.currentid == song.shareid else 'black'
+        color = 'red' if setting.currentid == song.shareid else None
         cmd("--{}".format(song_name), "play", i, refresh=True, color=color)
     cmd("Stop", "stop", refresh=True)
     print("Loop - {}".format(setting.loop))
