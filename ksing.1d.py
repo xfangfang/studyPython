@@ -1,8 +1,9 @@
 #!/usr/bin/env PYTHONIOENCODING=UTF-8 /usr/local/bin/python3
 
+
 # xbar Metadata
 # <xbar.title>KSing 全民K歌</xbar.title>
-# <xbar.version>v1.1</xbar.version>
+# <xbar.version>v1.2</xbar.version>
 # <xbar.author>xfangfang</xbar.author>
 # <xbar.author.github>xfangfang</xbar.author.github>
 # <xbar.desc>Play songs from KSing</xbar.desc>
@@ -383,9 +384,12 @@ def checkUpdateTime(setting):
             return player
     return None
 
-def cmd(title, p1, p2='nothing', refresh=False, color='black'):
+def cmd(title, p1, p2='nothing', refresh=False, color=None):
     current = int(round(time.time()))
-    print("{} | shell='{}' param1={} param2={} param3={} terminal=false refresh={} color={}".format(title, sys.argv[0], p1, p2, current, refresh, color))
+    if color == None:
+        print("{} | shell='{}' param1={} param2={} param3={} terminal=false refresh={}".format(title, sys.argv[0], p1, p2, current, refresh))
+    else:
+        print("{} | shell='{}' param1={} param2={} param3={} terminal=false refresh={} color={}".format(title, sys.argv[0], p1, p2, current, refresh, color))
 
 def main():
     setting = loadSetting()
