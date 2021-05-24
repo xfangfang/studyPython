@@ -152,8 +152,9 @@ class Player(Object):
         self.createSongCacheDir()
         song_path = '{}/{}/{}-{}.m4a'.format(Player.CACHE_PATH, self.userid, song.ksong_mid, song.time)
         if os.path.exists(song_path): return song_path
+        content = song.getContent()
         with open(song_path, 'wb') as f:
-            f.write(song.getContent())
+            f.write(content)
         return song_path
 
     @staticmethod
