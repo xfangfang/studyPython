@@ -1,5 +1,4 @@
-#!/usr/bin/env PYTHONIOENCODING=UTF-8 /usr/local/bin/python3
-
+#!/usr/bin/env PYTHONIOENCODING=UTF-8 python3
 
 # xbar Metadata
 # <xbar.title>KSing 全民K歌</xbar.title>
@@ -41,8 +40,6 @@ class jsonEnconding(json.JSONEncoder):
         return o.__dict__
 
 class Object():
-    session = requests.Session()
-    future_session = FuturesSession(session=session)
     CACHE_PATH = '{}/.ksing_cache'.format(os.path.expanduser('~'))
     SETTING_CACHE = '{}/setting.json'.format(CACHE_PATH)
     NUM_PER_PAGE = 8
@@ -67,7 +64,7 @@ class Object():
             }
 
     def getText(self, url):
-        return self.session.get(url, headers=self.headers).text
+        return requests.get(url, headers=self.headers).text
 
     @staticmethod
     def timeConverter(unixTime):
@@ -97,7 +94,7 @@ class Song(Object):
         return self.play_url_video if self.play_url == '' else self.play_url
 
     def getContent(self):
-        return self.session.get(self.getPlayUrl()).content
+        return requests.get(self.getPlayUrl()).content
 
     def __repr__(self):
         return "{} - {}".format(self.timeConverter(self.time), self.title)
@@ -122,10 +119,10 @@ class Player(Object):
         data = re.findall(r'[(](.*)[)]', content)[0]
         return json.loads(data)['data']
 
-    def _getInfoAsync(self, page):
+    def _getInfoAsync(self, page, future_session):
         url = "https://node.kg.qq.com/cgi/fcgi-bin/kg_ugc_get_homepage?type=get_uinfo&" + \
             "start={}&num={}&share_uid={}&callback=MusicJsonCallback".format(page, self.NUM_PER_PAGE, self.userid)
-        return self.future_session.get(url, headers = self.headers)
+        return future_session.get(url, headers = self.headers)
 
     def _addDataToPlaylist(self, songs_data_list):
         for data in songs_data_list:
@@ -183,7 +180,8 @@ class Player(Object):
         self._addDataToPlaylist(content['ugclist'])
         total_page = math.ceil(self.total_num/self.NUM_PER_PAGE)
 
-        futures=[self._getInfoAsync(i) for i in range(2, total_page+1)]
+        future_session = FuturesSession(max_workers = Object.REQUEST_WORKERS)
+        futures=[self._getInfoAsync(i, future_session) for i in range(2, total_page+1)]
         p = 1
         for future in as_completed(futures):
             p += 1
